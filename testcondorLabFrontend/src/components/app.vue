@@ -16,7 +16,7 @@
                       <div class="col-6">Open</div>
                       <div class="text-right col-6">
                         <button type="button" class="btn btn-sm" @click="taskAdd(arrayOpens)">
-                          <i class="icon-plus"></i>
+                         <font-awesome-icon icon="plus" />
                         </button>
                       </div>
                     </div>
@@ -33,13 +33,14 @@
                             placeholder="title of the task"
                             v-if="item.StatusRegistry == 0"
                           />
-                          <h5 v-else    
-                          v-text="item.title"></h5>
+                          <h5 v-else v-text="item.title"></h5>
                         </div>
-                        <textarea v-model="item.task" 
-                                  cols="30" 
-                                  rows="3"
-                                  @disable="item.StatusRegistry == 1"></textarea>
+                        <textarea
+                          v-model="item.task"
+                          cols="30"
+                          rows="3"
+                          @disable="item.StatusRegistry == 1"
+                        ></textarea>
                         <div class="card-foot foot">
                           <div class="row mb-1 mt-1">
                             <div class="col-6">
@@ -51,15 +52,20 @@
                               <button type="button" class="btn btn-sm ml-2">
                                 <i class="icon-note"></i>
                               </button>
-                              <button type="button" class="btn btn-sm" v-if="item.StatusRegistry == 1">
+                              <button
+                                type="button"
+                                class="btn btn-sm"
+                                v-if="item.StatusRegistry == 1"
+                              >
                                 <i class="icon-pencil"></i>
                               </button>
                               <button
                                 type="button"
                                 class="btn btn-sm"
+                                v-if="item.StatusRegistry == 1"
                                 @click="taskRemove(index,arrayOpens)"
                               >
-                                <i class="icon-trash"></i>
+                                <font-awesome-icon icon="trash" />
                               </button>
                             </div>
                           </div>
