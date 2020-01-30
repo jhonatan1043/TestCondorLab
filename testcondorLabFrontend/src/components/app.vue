@@ -45,12 +45,12 @@
                           <div class="row mb-1 mt-1">
                             <div class="col-6">
                               <button type="button" class="btn btn-sm">
-                                <i class="icon-user-follow"></i>
+                                  <font-awesome-icon icon="users" />
                               </button>
                             </div>
                             <div class="col-6 text-right">
                               <button type="button" class="btn btn-sm ml-2">
-                                <i class="icon-note"></i>
+                               <font-awesome-icon icon="save" />
                               </button>
                               <button
                                 type="button"
