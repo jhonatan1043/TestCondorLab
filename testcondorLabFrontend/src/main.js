@@ -7,6 +7,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import { faSave } from '@fortawesome/free-solid-svg-icons'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faBars }  from '@fortawesome/free-solid-svg-icons'
+import { faEdit }  from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -15,6 +17,8 @@ library.add(faTrash)
 library.add(faUsers)
 library.add(faSave)
 library.add(faTimes)
+library.add(faBars)
+library.add(faEdit)
  
 vue.component('font-awesome-icon', FontAwesomeIcon)
  

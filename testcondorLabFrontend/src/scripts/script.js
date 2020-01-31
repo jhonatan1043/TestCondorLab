@@ -7,7 +7,7 @@ export default {
       statusOpen: 0,
       statusProgress: 1,
       statusCompleteds: 2,
-      arrayCards: [{title:'open',array: []},
+      arrayCards: [{title:'pending',array: []},
                   {title:'Progress',array: []},
                   {title:'Completeds',array: []}],
       arrayListUsers: []
@@ -20,7 +20,6 @@ export default {
         .get("http://localhost:3000/listUsers")
         .then(res => {
           me.arrayListUsers = res.data;
-          console.log(me.arrayListUsers);
         })
         .catch(err => {
           console.error(err);
@@ -30,14 +29,9 @@ export default {
       let me = this;
       axios.get('http://localhost:3000/listTask')
         .then(res => {
-          let arrayListTask = res.data;
-          me.arrayCards[0]['array'] = arrayListTask.filter(statusTask => {
-             return statusTask = me.statusOpen;
-          })
-          console.log(arrayListTask);
-          console.log(arrayListTask.filter(statusTask => {
-            return statusTask = me.statusOpen;
-         }));
+           let arrayTask = res.data[0];
+           me.arrayCards[0]['array'] = arrayTask;
+           console.log(me.arrayCards[0]['array']);
         })
         .catch(err => {
           console.error(err);
@@ -48,7 +42,7 @@ export default {
         id: 0,
         title: '',
         task: '',
-        StatusRegistry: 0
+        statusRegistry: 0
       });
     },
     taskRemove(index, array) {
