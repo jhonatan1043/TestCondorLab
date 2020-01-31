@@ -15,7 +15,7 @@ module.exports = function (app) {
 
     // List task open
     app.get('/listTask', (req, res) => {
-        task.listTask(req.body, (err, data) => {
+        task.listTask((err, data) => {
                 res.json(data);
         });
     });

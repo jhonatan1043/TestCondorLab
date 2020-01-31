@@ -4,15 +4,13 @@ export default {
   name: "app",
   data() {
     return {
-      arraylistStatus: [{
-        statusOpen: 0,
-        statusProgress: 1,
-        statusCompleteds: 2
-      }],
-      arrayListUsers: [],
-      arrayOpens: [],
-      arrayProgress: [],
-      arrayCompleteds: []
+      statusOpen: 0,
+      statusProgress: 1,
+      statusCompleteds: 2,
+      arrayCards: [{title:'open',array: []},
+                  {title:'Progress',array: []},
+                  {title:'Completeds',array: []}],
+      arrayListUsers: []
     };
   },
   methods: {
@@ -28,23 +26,22 @@ export default {
           console.error(err);
         });
     },
-    listTasks(status){
+    listTasks() {
       let me = this;
-      axios.get('http://localhost:3000/listTasks',{
-       status: status 
-      })
-      .then(res => {
-        if(status == me.arraylistStatus.statusOpen){
-          me.arrayOpens = res.data;
-        }else if(status == me.arraylistStatus.statusProgress){
-          me.arrayProgress = res.data;
-        }else if(status == me.arraylistStatus.statusCompleteds){
-          me.arrayCompleteds = res.data;
-        }
-      })
-      .catch(err => {
-        console.error(err); 
-      })
+      axios.get('http://localhost:3000/listTask')
+        .then(res => {
+          let arrayListTask = res.data;
+          me.arrayCards[0]['array'] = arrayListTask.filter(statusTask => {
+             return statusTask = me.statusOpen;
+          })
+          console.log(arrayListTask);
+          console.log(arrayListTask.filter(statusTask => {
+            return statusTask = me.statusOpen;
+         }));
+        })
+        .catch(err => {
+          console.error(err);
+        })
     },
     taskAdd(array) {
       array.push({
@@ -55,12 +52,11 @@ export default {
       });
     },
     taskRemove(index, array) {
+      console.log(array)
       array.splice(index, 1);
     }
   },
   mounted() {
-    this.listTasks(this.arraylistStatus.statusOpen);
-    this.listTasks(this.arraylistStatus.statusProgress);
-    this.listTasks(this.arraylistStatus.statusCompleteds);
+   this.listTasks()
   }
 };

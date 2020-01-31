@@ -18,11 +18,9 @@ taskModel.createTasks = (taskData, callback) => {
     };
 };
 //list the tasks according to the status received
-taskModel.listTask = (taskData, callback) => {
+taskModel.listTask = (callback) => {
     if (connection) {
-        let status = connection.escape(taskData.status);
-        let string = 'CALL spListTasks (' + status + ')';
-        console.log(string);
+        let string = 'CALL spListTasks()';
         connection.query(string,
             (err, result) => {
                 if (err) {
