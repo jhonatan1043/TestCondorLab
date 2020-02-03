@@ -48,6 +48,22 @@ taskModel.uptateTasks = (taskData, callback) => {
     };
 };
 
+taskModel.changeStatusTask = (taskData, callback) => {
+    if (connection) {
+        connection.query('UPDATE tasks SET ?', taskData,
+            (err, result) => {
+                if (err) {
+                    throw err;
+                } else {
+                    callback(null, {
+                        "msg": 'success'
+                    });
+                }
+            }
+        );
+    };
+};
+
 taskModel.deleteTask = (id, callback) => {
     if (connection) {
         let string = 'DELETE FROM task SET ?';

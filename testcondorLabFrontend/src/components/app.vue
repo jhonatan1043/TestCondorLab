@@ -77,31 +77,45 @@
                       <textarea
                         v-model="itemSubCard.task"
                         cols="30"
-                        rows="3"
+                        rows="2"
                         :disabled="itemSubCard.statusRegistry == 1"
                       ></textarea>
+                      <!-- start the footer of the subcard -->
                       <div class="card-foot foot">
-                        <div class="row mb-1 mt-1">
-                          <div class="col-2">
-                            <button type="button" class="btn btn-sm">
-                              <font-awesome-icon icon="users" />
-                            </button>
-                          </div>
-                          <div class="col-5 text-center">
+                        <div class="row mt-1 mb-1">
+                          <!-- select the users -->
+                          <div class="col-4">
                             <select
-                              class="form-control selectpicker"
+                              class="form-control selectpicker form-control-sm"
+                              v-model="itemSubCard.idUser"
+                            >
+                              <option selected :value="0">User</option>
+                              <option
+                                v-for="item in arrayListUsers"
+                                :key="item.IdUser"
+                                :value="item.IdUser"
+                                v-text="item.UserName"
+                              ></option>
+                            </select>
+                          </div>
+                          <!-- select the status task -->
+                          <div class="col-4 text-center popper">
+                            <select
+                              class="form-control selectpicker form-control-sm"
                               v-model="itemSubCard.statusTask"
+                              @change="changeStatus(itemCard.array[indexSubcard])"
                             >
                               <option selected :value="0">Pending</option>
                               <option selected :value="1">Progress</option>
                               <option selected :value="2">Completed</option>
                             </select>
                           </div>
-                          <div class="col-5 text-right">
+                          <!-- button of fuction -->
+                          <div class="col-4 text-right">
                             <button
                               type="button"
                               class="btn btn-sm ml-2"
-                               v-if="itemSubCard.statusRegistry == 0"
+                              v-if="itemSubCard.id != 0 && itemSubCard.statusRegistry == 0"
                               @click="createTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="save" />
@@ -109,7 +123,7 @@
                             <button
                               type="button"
                               class="btn btn-sm ml-2"
-                              v-if="itemSubCard.id != 0 && itemSubCard.statusRegistry == 0"
+                              v-else-if="itemSubCard.statusRegistry == 0"
                               @click="updateTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="save" />
@@ -131,8 +145,10 @@
                               <font-awesome-icon icon="trash" />
                             </button>
                           </div>
+                          <!-- -->
                         </div>
                       </div>
+                      <!-- end of the foot of the subCars -->
                     </div>
                   </div>
                 </div>

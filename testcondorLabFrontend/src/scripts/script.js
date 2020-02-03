@@ -27,7 +27,7 @@ export default {
     },
     createTask(arrayCreate) {
       if (arrayCreate[0]['idUser'] != 0) {
-        axios.post('/createTask', {
+        axios.post('http://localhost:3000//createTask', {
           task: arrayCreate.task,
           title: arrayCreate.title,
           idUser: arrayCreate.idUser,
@@ -57,8 +57,8 @@ export default {
     },
     updateTask(arrayUpdate) {
       if (arrayUpdate[0]['idUser'] != 0) {
-        axios.post('/createTask', {
-          id :  arrayUpdate.id,
+        axios.post('http://localhost:3000/updateTask', {
+          id: arrayUpdate.id,
           task: arrayUpdate.task,
           title: arrayUpdate.title,
           idUser: arrayUpdate.idUser,
@@ -74,16 +74,16 @@ export default {
         alert('¡Falta asignar el usuario!')
       }
     },
-    deleteTask(arrayDelete){
-      axios.delete('/deleteTask',{
-        id : arrayDelete.id
+    deleteTask(arrayDelete) {
+      axios.delete('http://localhost:3000/deleteTask', {
+        id: arrayDelete.id
       })
-      .then(res => {
-        this.listTasks();
-      })
-      .catch(err => {
-        console.error(err); 
-      })
+        .then(res => {
+          this.listTasks();
+        })
+        .catch(err => {
+          console.error(err);
+        })
     },
     addTask(array, indexStatus) {
       array.push({
@@ -96,17 +96,31 @@ export default {
       });
     },
     removeTask(index, array) {
-      if (array[0]['id'] != 0) {
-        this.$set(array, 'statusRegistry', 1)
+      if (array[index]['id'] != 0) {
+        this.$set(array[index], 'statusRegistry', 1)
       } else {
         array.splice(index, 1);
       }
     },
     editTask(arrayEdit) {
       this.$set(arrayEdit, 'statusRegistry', 0)
+    },
+    changeStatus(array) {
+      let me = this;
+      axios.put('http://localhost:3000/changeStatusTask', {
+        id: array.id,
+        statusTask: array.statusTask
+      })
+        .then(res => {
+          me.listTasks();
+        })
+        .catch(err => {
+          console.error(err);
+        })
     }
   },
   mounted() {
+    this.listUsers()
     this.listTasks()
   }
 };

@@ -1,5 +1,6 @@
 import vue from 'vue';
-import app from './components/app';
+import app from './components/app'
+import popper from 'popper.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -21,7 +22,8 @@ library.add(faBars)
 library.add(faEdit)
  
 vue.component('font-awesome-icon', FontAwesomeIcon)
- 
+vue.component('popper',popper)
+
 vue.config.productionTip = false
 
 new vue({

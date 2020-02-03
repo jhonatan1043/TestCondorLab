@@ -35,6 +35,16 @@ module.exports = function (app) {
             res.json(data);
         });
     });
+    // change status of a task
+    app.put('/changeStatusTask', (req, res) => {
+        const taskData = {
+            id: req.body.id,
+            statusTask: req.body.statusTask
+        };
+        task.changeStatusTask(taskData, (err, data) => {
+            res.json(data);
+        });
+    });
     // delete a task of the list
     app.delete('/deleteTask', (req, res) => {
         task.deleteTask(req.body.id, (err, data) => {
