@@ -1,0 +1,15 @@
+.header {
+    background-color: #abebc6;
+  }
+  .header-body {
+    background-color: #8be3b0;
+  }
+  .foot {
+    background-color: #abebc6;
+  }
+  .title {
+    color: white;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-style: normal;
+  }
