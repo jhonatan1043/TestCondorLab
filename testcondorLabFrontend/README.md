@@ -5,6 +5,9 @@
 ## Build Setup
 
 ``` bash
+#enters
+cd..testcondorlabfrontend
+
 # install dependencies
 npm install
 
