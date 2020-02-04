@@ -1,20 +1,20 @@
-const connection = require('../../db/server');
+const { Sequelize } = require('sequelize')
+const dataBase = require('../../database/server')
 
-let userModel = {};
+module.exports = dataBase.define('users', {
+  idUser: {
+    type: Sequelize.INTEGER(11),
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+  },
+  userName: {
+    type: Sequelize.STRING(45),
+    allowNull: false,
+  },
+  email: {
+    type: Sequelize.STRING(100),
+    allowNull: false,
+  }
+});
 
-userModel.listUsers = (callback) => {
-    if (connection) {
-        connection.query(
-            'SELECT IdUser,UserName,Email FROM testbd.users;',
-            (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    callback(null, result);
-                }
-            }
-        );
-    }
-};
-
-module.exports = userModel;

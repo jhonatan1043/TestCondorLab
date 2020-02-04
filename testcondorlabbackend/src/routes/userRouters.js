@@ -1,4 +1,4 @@
-const user = require('../models/user');
+const user = require('../controllers/userController');
 
 module.exports = function (app) {
 
@@ -8,5 +8,4 @@ module.exports = function (app) {
             res.json(data);
         })
     });
-    
 }

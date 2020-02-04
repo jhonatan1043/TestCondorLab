@@ -1,25 +1,22 @@
-const task = require('../models/task');
+const taskController = require('../controllers/taskController')
 
 module.exports = function (app) {
-
     // create Task
     app.post('/createTask', (req, res) => {
         const taskData = {
-            task: req.body.task,
             title: req.body.title,
-            isUser: req.body.idUser,
+            task: req.body.task,
+            idUser: req.body.idUser,
             statusTask: req.body.statusTask
         };
         task.createTasks(taskData, (err, data) => {
             res.json(data);
         });
     });
-
-    // List task open
+    // list all the task
     app.get('/listTask', (req, res) => {
-        task.listTask((err, data) => {
+        taskController.listTasks((err, data) => {
             res.json(data);
-            console.log(data);
         });
     });
     // update a task of the list
@@ -28,7 +25,7 @@ module.exports = function (app) {
             id: req.body.id,
             task: req.body.task,
             title: req.body.title,
-            isUser: req.body.idUser,
+            idUser: req.body.idUser,
             statusTask: req.body.statusTask
         };
         task.updateTask(taskData, (err, data) => {
@@ -48,7 +45,7 @@ module.exports = function (app) {
     // delete a task of the list
     app.delete('/deleteTask', (req, res) => {
         task.deleteTask(req.body.id, (err, data) => {
-          res.json(data);
+            res.json(data);
         })
     })
 }

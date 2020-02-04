@@ -1,82 +1,28 @@
-const connection = require('../../db/server');
+const { Sequelize } = require('sequelize')
+const dataBase =require('../../database/server');
 
-let taskModel = {};
-
-taskModel.createTasks = (taskData, callback) => {
-    if (connection) {
-        connection.query('INSERT INTO tasks SET ?', taskData,
-            (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    callback(null, {
-                        "msg": 'success'
-                    });
-                }
-            }
-        );
-    };
-};
-//list the tasks according to the status received
-taskModel.listTask = (callback) => {
-    if (connection) {
-        let string = 'SELECT idTask AS id,title,task,idUser,statusTask, 1 statusRegistry FROM testbd.tasks';
-        connection.query(string,
-            (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    callback(null, result);
-                }
-            });
+module.exports = dataBase.define("tasks", {
+    idTask: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    title: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        unique: true
+    },
+    task: {
+        type: Sequelize.STRING(45),
+        allowNull: false
+    },
+    idUser: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false
+    },
+    statusTask: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false
     }
-};
-
-taskModel.uptateTasks = (taskData, callback) => {
-    if (connection) {
-        connection.query('UPDATE tasks SET ?', taskData,
-            (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    callback(null, {
-                        "msg": 'success'
-                    });
-                }
-            }
-        );
-    };
-};
-
-taskModel.changeStatusTask = (taskData, callback) => {
-    if (connection) {
-        connection.query('UPDATE tasks SET ?', taskData,
-            (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    callback(null, {
-                        "msg": 'success'
-                    });
-                }
-            }
-        );
-    };
-};
-
-taskModel.deleteTask = (id, callback) => {
-    if (connection) {
-        let string = 'DELETE FROM task SET ?';
-        connection.query(string, id,
-            (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    callback(null, result);
-                }
-            })
-    }
-};
-
-
-module.exports = taskModel;
+})
