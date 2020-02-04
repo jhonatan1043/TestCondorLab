@@ -1,6 +1,9 @@
+//we import sequelize and and the database
 const { Sequelize } = require('sequelize')
 const dataBase =require('../../database/server');
-
+/* we define our tasks table 
+   with all its fields y la exportamos
+*/
 module.exports = dataBase.define("tasks", {
     idTask: {
         type: Sequelize.INTEGER(11),
@@ -25,4 +28,4 @@ module.exports = dataBase.define("tasks", {
         type: Sequelize.INTEGER(11),
         allowNull: false
     }
-})
+}) // end

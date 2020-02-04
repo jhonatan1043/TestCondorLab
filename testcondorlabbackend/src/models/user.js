@@ -1,6 +1,9 @@
+//we import sequelize and and the database
 const { Sequelize } = require('sequelize')
 const dataBase = require('../../database/server')
-
+/* we define our users table 
+   with all its fields y la exportamos
+*/
 module.exports = dataBase.define('users', {
   idUser: {
     type: Sequelize.INTEGER(11),
@@ -16,5 +19,5 @@ module.exports = dataBase.define('users', {
     type: Sequelize.STRING(100),
     allowNull: false,
   }
-});
+}); // end
 

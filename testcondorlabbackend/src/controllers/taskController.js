@@ -1,7 +1,10 @@
+//we import the model of our task
 const Task = require('../models/task')
 
+// we create our object
 let taskController = {}
 
+// function to create our tasks
 taskController.createTask = (taskData, callBack) => {
     Task.create({
         title: taskData.title,
@@ -14,7 +17,7 @@ taskController.createTask = (taskData, callBack) => {
         })
         .catch(err => console.log(err))
 }
-
+// function to list our tasks
 taskController.listTasks = (callBack) => {
     Task.findAll()
         .then(tasks => {
@@ -22,7 +25,7 @@ taskController.listTasks = (callBack) => {
         })
         .catch(err => console.log(err))
 }
-
+// function to update our tasks
 taskController.updateTask = (taskData, callBack) => {
     Task.update({
         title: taskData.title,
@@ -36,7 +39,7 @@ taskController.updateTask = (taskData, callBack) => {
     })
         .catch(err => console.log(err))
 }
-
+//function to change the status of our tasks
 taskController.changeStatusTask = (taskData, callBack) => {
     Task.update({
         statusTask: taskData.statusTask,
@@ -47,12 +50,12 @@ taskController.changeStatusTask = (taskData, callBack) => {
     })
         .catch(err => console.log(err))
 }
-
+//function to delete a task our tasks
 taskController.deleteTask = (id, callBack) => {
     Task.destroy({ where: { idTask: id } }).then(tasks => {
         callBack(null, tasks);
     })
         .catch(err => console.log(err))
 }
-
+//we export the object
 module.exports = taskController;
