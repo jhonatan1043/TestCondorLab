@@ -58,7 +58,7 @@
                               class="form-control form-control-sm"
                               v-model="itemSubCard.title"
                               placeholder="title of the task"
-                              v-if="itemSubCard.idTask == 0"
+                              v-if="itemSubCard.statusRecord == 0"
                             />
                             <h5 class="text-center" v-else v-text="itemSubCard.title"></h5>
                           </div>
@@ -67,7 +67,7 @@
                               type="button"
                               class="btn btn-sm"
                               @click="removeTask(indexSubcard,itemCard.array)"
-                              v-if="itemSubCard.idTask == 0"
+                              v-if="itemSubCard.statusRecord == 0"
                             >
                               <font-awesome-icon icon="times" />
                             </button>
@@ -78,7 +78,7 @@
                         v-model="itemSubCard.task"
                         cols="30"
                         rows="2"
-                        :disabled="itemSubCard.idTask != 0"
+                        :disabled="itemSubCard.statusRecord == 1"
                       ></textarea>
                       <!-- start the footer of the subcard -->
                       <div class="card-foot foot">
@@ -88,7 +88,7 @@
                             <select
                               class="form-control selectpicker form-control-sm"
                               v-model="itemSubCard.idUser"
-                              :disabled="itemSubCard.idTask != 0"
+                              :disabled="itemSubCard.statusRecord == 1"
                             >
                               <option selected :value="0">User</option>
                               <option
@@ -104,6 +104,7 @@
                             <select
                               class="form-control selectpicker form-control-sm"
                               v-model="itemSubCard.statusTask"
+                              :disabled ="itemSubCard.statusRecord == 0"
                               @change="changeStatus(itemCard.array[indexSubcard])"
                             >
                               <option selected :value="0">Pending</option>
@@ -116,16 +117,8 @@
                             <button
                               type="button"
                               class="btn btn-sm ml-2"
-                              v-if="itemSubCard.idTask != 0 && itemSubCard.idTask == 0"
-                              @click="createTask(itemCard.array[indexSubcard])"
-                            >
-                              <font-awesome-icon icon="save" />
-                            </button>
-                            <button
-                              type="button"
-                              class="btn btn-sm ml-2"
-                              v-else-if="itemSubCard.idTask == 0"
-                              @click="updateTask(itemCard.array[indexSubcard])"
+                              v-if="itemSubCard.statusRecord == 0"
+                              @click="registerTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="save" />
                             </button>
@@ -133,14 +126,14 @@
                               type="button"
                               class="btn btn-sm"
                               @click="editTask(itemCard.array[indexSubcard])"
-                              v-if="itemSubCard.idTask != 0"
+                              v-if="itemSubCard.statusRecord == 1"
                             >
                               <font-awesome-icon icon="edit" />
                             </button>
                             <button
                               type="button"
                               class="btn btn-sm"
-                              v-if="itemSubCard.idTask != 0"
+                              v-if="itemSubCard.statusRecord == 1"
                               @click="deleteTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="trash" />

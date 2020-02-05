@@ -27,5 +27,5 @@ module.exports = dataBase.define("tasks", {
     statusTask: {
         type: Sequelize.INTEGER(11),
         allowNull: false
-    },
+    }
 }) // end

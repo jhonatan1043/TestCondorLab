@@ -27,12 +27,12 @@ export default {
     },
     createTask(arrayCreate) {
       let me = this;
-      if (arrayCreate[0]['idUser'] != 0) {
-        axios.post('http://localhost:3000//createTask', {
-          task: arrayCreate.task,
-          title: arrayCreate.title,
-          idUser: arrayCreate.idUser,
-          statusTask: arrayCreate.statusTask
+      if (arrayCreate.idUser != 0) {
+        axios.post('http://localhost:3000/createTask', {
+          'task': arrayCreate.task,
+          'title': arrayCreate.title,
+          'idUser': arrayCreate.idUser,
+          'statusTask': arrayCreate.statusTask
         })
           .then(res => {
             me.list();
@@ -53,7 +53,7 @@ export default {
       })
         .then(res => {
           let arrayTask = res.data;
-
+          console.log(arrayTask)
           if (status == me.statusPending) {
             me.arrayCards[0]['array'] = arrayTask;
           } else if (status == me.statusProgress) {
@@ -69,8 +69,8 @@ export default {
     },
     updateTask(arrayUpdate) {
       let me = this;
-      if (arrayUpdate[0]['idUser'] != 0) {
-        axios.post('http://localhost:3000/updateTask', {
+      if (arrayUpdate.idUser != 0) {
+        axios.put('http://localhost:3000/updateTask', {
           id: arrayUpdate.idTask,
           task: arrayUpdate.task,
           title: arrayUpdate.title,
@@ -90,7 +90,7 @@ export default {
     deleteTask(arrayDelete) {
       let me = this;
       axios.delete('http://localhost:3000/deleteTask', {
-        id: arrayDelete.idTask
+        params: { id: arrayDelete.idTask }
       })
         .then(res => {
           me.list();
@@ -105,18 +105,19 @@ export default {
         title: '',
         task: '',
         statusTask: indexStatus,
-        idUser: 0
+        idUser: 0,
+        statusRecord: 0
       });
     },
     removeTask(index, array) {
       if (array[index]['idTask'] != 0) {
-        this.$set(array[index], 'statusRegistry', 1)
+        this.$set(array[index], 'statusRecord', 1)
       } else {
         array.splice(index, 1);
       }
     },
     editTask(arrayEdit) {
-      this.$set(arrayEdit, 'statusRegistry', 0)
+      this.$set(arrayEdit, 'statusRecord', 0)
     },
     changeStatus(array) {
       let me = this;
@@ -135,8 +136,14 @@ export default {
       this.listTasks(this.statusPending);
       this.listTasks(this.statusProgress);
       this.listTasks(this.statusCompleteds);
+    },
+    registerTask(array) {
+      if (array.idTask != 0) {
+        this.updateTask(array);
+      } else {
+        this.createTask(array);
+      }
     }
-
   },
   mounted() {
     this.listUsers();

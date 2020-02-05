@@ -1,24 +1,24 @@
 //we import the model of our task
 const Task = require('../models/task')
-
+const dataBase = require('../../database/server')
+const sequelize = require('sequelize')
 // we create our object
 let taskController = {}
 
 // function to create our tasks
 taskController.createTask = (taskData, callBack) => {
-    Task.create(
-        { title: taskData.title },
-        { task: taskData.task },
-        { idUser: taskData.idUser },
-        { statusTask: taskData.statusTask })
-        .then(task => {
-            callBack(null, task)
+    Task.create(taskData)
+        .then(() => {
+            callBack(null, {
+                msg: 'success'
+            })
         })
         .catch(err => console.log(err))
 }
 // function to list our tasks
 taskController.listTasks = (statusTask, callBack) => {
-    Task.findAll({ where: { statusTask: statusTask } })
+    dataBase.query("select idTask, title, task, statusTask, idUser, 1 As statusRecord FROM tasks WHERE statusTask = ?",
+        { replacements: [statusTask], type: sequelize.QueryTypes.SELECT })
         .then(tasks => {
             callBack(null, tasks);
         })
@@ -26,14 +26,9 @@ taskController.listTasks = (statusTask, callBack) => {
 }
 // function to update our tasks
 taskController.updateTask = (taskData, callBack) => {
-    Task.update(
-        { title: taskData.title },
-        { task: taskData.task },
-        { idUser: taskData.idUser },
-        { statusTask: taskData.statusTask },
-        {
-            where: { idTask: id }
-        }).then(tasks => {
+    Task.update(taskData,
+        {where: { idTask: taskData.id } }
+        ).then(tasks => {
             callBack(null, tasks);
         })
         .catch(err => console.log(err))
@@ -49,8 +44,9 @@ taskController.changeStatusTask = (taskData, callBack) => {
         .catch(err => console.log(err))
 }
 //function to delete a task our tasks
-taskController.deleteTask = (id, callBack) => {
-    Task.destroy({ where: { idTask: id } }).then(tasks => {
+taskController.deleteTask = (dataTask, callBack) => {
+    console.log(dataTask)
+    Task.destroy({ where: { idTask: dataTask.id } }).then(tasks => {
         callBack(null, tasks);
     })
         .catch(err => console.log(err))

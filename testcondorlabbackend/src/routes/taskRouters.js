@@ -9,8 +9,8 @@ module.exports = function (app) {
             idUser: req.body.idUser,
             statusTask: req.body.statusTask
         };
-        taskController.createTasks(taskData, (err, data) => {
-            res.json(data);
+        taskController.createTask(taskData, (err, data) => {
+           res.json(data);
         });
     });
     // list all the task
@@ -44,7 +44,8 @@ module.exports = function (app) {
     });
     // delete a task of the list
     app.delete('/deleteTask', (req, res) => {
-        taskController.deleteTask(req.body.id, (err, data) => {
+        console.log(req.query)
+        taskController.deleteTask(req.query, (err, data) => {
             res.json(data);
         })
     })
