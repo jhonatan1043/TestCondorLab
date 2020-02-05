@@ -58,7 +58,7 @@
                               class="form-control form-control-sm"
                               v-model="itemSubCard.title"
                               placeholder="title of the task"
-                              v-if="itemSubCard.statusRegistry == 0"
+                              v-if="itemSubCard.idTask == 0"
                             />
                             <h5 class="text-center" v-else v-text="itemSubCard.title"></h5>
                           </div>
@@ -67,7 +67,7 @@
                               type="button"
                               class="btn btn-sm"
                               @click="removeTask(indexSubcard,itemCard.array)"
-                              v-if="itemSubCard.statusRegistry == 0"
+                              v-if="itemSubCard.idTask == 0"
                             >
                               <font-awesome-icon icon="times" />
                             </button>
@@ -78,7 +78,7 @@
                         v-model="itemSubCard.task"
                         cols="30"
                         rows="2"
-                        :disabled="itemSubCard.statusRegistry == 1"
+                        :disabled="itemSubCard.idTask != 0"
                       ></textarea>
                       <!-- start the footer of the subcard -->
                       <div class="card-foot foot">
@@ -88,13 +88,14 @@
                             <select
                               class="form-control selectpicker form-control-sm"
                               v-model="itemSubCard.idUser"
+                              :disabled="itemSubCard.idTask != 0"
                             >
                               <option selected :value="0">User</option>
                               <option
                                 v-for="item in arrayListUsers"
                                 :key="item.IdUser"
-                                :value="item.IdUser"
-                                v-text="item.UserName"
+                                :value="item.idUser"
+                                v-text="item.userName"
                               ></option>
                             </select>
                           </div>
@@ -115,7 +116,7 @@
                             <button
                               type="button"
                               class="btn btn-sm ml-2"
-                              v-if="itemSubCard.id != 0 && itemSubCard.statusRegistry == 0"
+                              v-if="itemSubCard.idTask != 0 && itemSubCard.idTask == 0"
                               @click="createTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="save" />
@@ -123,7 +124,7 @@
                             <button
                               type="button"
                               class="btn btn-sm ml-2"
-                              v-else-if="itemSubCard.statusRegistry == 0"
+                              v-else-if="itemSubCard.idTask == 0"
                               @click="updateTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="save" />
@@ -132,14 +133,14 @@
                               type="button"
                               class="btn btn-sm"
                               @click="editTask(itemCard.array[indexSubcard])"
-                              v-if="itemSubCard.statusRegistry == 1"
+                              v-if="itemSubCard.idTask != 0"
                             >
                               <font-awesome-icon icon="edit" />
                             </button>
                             <button
                               type="button"
                               class="btn btn-sm"
-                              v-if="itemSubCard.statusRegistry == 1"
+                              v-if="itemSubCard.idTask != 0"
                               @click="deleteTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="trash" />

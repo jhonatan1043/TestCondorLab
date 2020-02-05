@@ -9,13 +9,13 @@ module.exports = function (app) {
             idUser: req.body.idUser,
             statusTask: req.body.statusTask
         };
-        task.createTasks(taskData, (err, data) => {
+        taskController.createTasks(taskData, (err, data) => {
             res.json(data);
         });
     });
     // list all the task
     app.get('/listTask', (req, res) => {
-        taskController.listTasks((err, data) => {
+        taskController.listTasks(req.query.statusTask, (err, data) => {
             res.json(data);
         });
     });
@@ -28,7 +28,7 @@ module.exports = function (app) {
             idUser: req.body.idUser,
             statusTask: req.body.statusTask
         };
-        task.updateTask(taskData, (err, data) => {
+        taskController.updateTask(taskData, (err, data) => {
             res.json(data);
         });
     });
@@ -38,13 +38,13 @@ module.exports = function (app) {
             id: req.body.id,
             statusTask: req.body.statusTask
         };
-        task.changeStatusTask(taskData, (err, data) => {
+        taskController.changeStatusTask(taskData, (err, data) => {
             res.json(data);
         });
     });
     // delete a task of the list
     app.delete('/deleteTask', (req, res) => {
-        task.deleteTask(req.body.id, (err, data) => {
+        taskController.deleteTask(req.body.id, (err, data) => {
             res.json(data);
         })
     })
