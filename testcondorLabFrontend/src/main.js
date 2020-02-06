@@ -21,7 +21,6 @@ library.add(faBars)
 library.add(faEdit)
  
 vue.component('font-awesome-icon', FontAwesomeIcon)
-vue.component('popper',popper)
 
 vue.config.productionTip = false
 
