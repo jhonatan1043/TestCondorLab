@@ -1,3 +1,6 @@
+ -- Script que al ejecutar en el administrador 
+ -- de la base de datos en este caso mysql, permite crear la base de datos con sus tablas
+ 
 /*CREATE DATABASE testdb;
 
 USE testdb;

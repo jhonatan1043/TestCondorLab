@@ -16,9 +16,11 @@ taskController.createTask = (taskData, callBack) => {
         .catch(err => console.log(err))
 }
 // function to list our tasks
-taskController.listTasks = (statusTask, callBack) => {
-    dataBase.query("select idTask, title, task, statusTask, idUser, 1 As statusRecord FROM tasks WHERE statusTask = ?",
-        { replacements: [statusTask], type: sequelize.QueryTypes.SELECT })
+taskController.listTasks = (taskData, callBack) => {
+    dataBase.query("select idTask, title, task, statusTask," +
+                   " idUser, 1 As statusRecord FROM tasks" + 
+                   " WHERE statusTask = ? AND title LIKE CONCAT('%', ? ,'%');",
+        { replacements: [taskData.statusTask, taskData.search], type: sequelize.QueryTypes.SELECT })
         .then(tasks => {
             callBack(null, tasks);
         })
@@ -27,10 +29,10 @@ taskController.listTasks = (statusTask, callBack) => {
 // function to update our tasks
 taskController.updateTask = (taskData, callBack) => {
     Task.update(taskData,
-        {where: { idTask: taskData.id } }
-        ).then(tasks => {
-            callBack(null, tasks);
-        })
+        { where: { idTask: taskData.id } }
+    ).then(tasks => {
+        callBack(null, tasks);
+    })
         .catch(err => console.log(err))
 }
 //function to change the status of our tasks

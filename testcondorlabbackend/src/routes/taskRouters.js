@@ -10,12 +10,16 @@ module.exports = function (app) {
             statusTask: req.body.statusTask
         };
         taskController.createTask(taskData, (err, data) => {
-           res.json(data);
+            res.json(data);
         });
     });
     // list all the task
     app.get('/listTask', (req, res) => {
-        taskController.listTasks(req.query.statusTask, (err, data) => {
+        const taskData = {
+            statusTask: req.query.statusTask,
+            search: req.query.search
+        }
+        taskController.listTasks(taskData, (err, data) => {
             res.json(data);
         });
     });

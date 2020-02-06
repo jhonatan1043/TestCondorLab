@@ -12,7 +12,12 @@
               <h5 class="title">My Tasks</h5>
             </div>
             <div class="col-6 txt-center">
-              <input type="search" class="form-control form-control-sm" placeholder="Search Task" />
+              <input type="search" 
+                     class="form-control form-control-sm" 
+                     placeholder="Search Task" 
+                     v-model="search"
+                     @keyup.enter="list()"
+                     />
             </div>
             <div class="col-2 text-right">
               <button type="button" class="btn btn-sm">

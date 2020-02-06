@@ -7,6 +7,7 @@ export default {
       statusPending: 0,
       statusProgress: 1,
       statusCompleteds: 2,
+      search: '',
       arrayCards: [{ title: 'pending', array: [] },
       { title: 'Progress', array: [] },
       { title: 'Completeds', array: [] }],
@@ -48,7 +49,8 @@ export default {
       let me = this;
       axios.get('http://localhost:3000/listTask', {
         params: {
-          statusTask: status
+          statusTask: status,
+          search: me.search
         }
       })
         .then(res => {
