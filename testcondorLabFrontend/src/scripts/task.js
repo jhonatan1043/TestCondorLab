@@ -2,14 +2,15 @@
 import axios from "axios";
 
 export default {
- 
-  name: "app",
-//we declare in the data function the variables to use
+
+  name: "task",
+  //we declare in the data function the variables to use
   data() {
     return {
       statusPending: 0,
       statusProgress: 1,
       statusCompleteds: 2,
+      modal: 0,
       search: '',
       arrayCards: [{ title: 'pending', array: [] },
       { title: 'Progress', array: [] },
@@ -127,6 +128,12 @@ export default {
     },
     editTask(arrayEdit) {
       this.$set(arrayEdit, 'statusRecord', 0)
+    },
+    openModal() {
+      this.modal = 1;
+    },
+    closedModal() {
+      this.modal = 0;
     },
     changeStatus(array) {
       let me = this;
