@@ -12,12 +12,13 @@
               <h5 class="title">My Tasks</h5>
             </div>
             <div class="col-6 txt-center">
-              <input type="search" 
-                     class="form-control form-control-sm" 
-                     placeholder="Search Task" 
-                     v-model="search"
-                     @keyup.enter="list()"
-                     />
+              <input
+                type="search"
+                class="form-control form-control-sm"
+                placeholder="Search Task"
+                v-model="search"
+                @keyup.enter="list()"
+              />
             </div>
             <div class="col-2 text-right">
               <button type="button" class="btn btn-sm">
@@ -105,11 +106,11 @@
                             </select>
                           </div>
                           <!-- select the status task -->
-                          <div class="col-4 text-center popper">
+                          <div class="col-4 text-center">
                             <select
                               class="form-control selectpicker form-control-sm"
                               v-model="itemSubCard.statusTask"
-                              :disabled ="itemSubCard.statusRecord == 0"
+                              :disabled="itemSubCard.statusRecord == 0"
                               @change="changeStatus(itemCard.array[indexSubcard])"
                             >
                               <option selected :value="0">Pending</option>
@@ -123,6 +124,9 @@
                               type="button"
                               class="btn btn-sm ml-2"
                               v-if="itemSubCard.statusRecord == 0"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Record"
                               @click="registerTask(itemCard.array[indexSubcard])"
                             >
                               <font-awesome-icon icon="save" />
@@ -130,6 +134,9 @@
                             <button
                               type="button"
                               class="btn btn-sm"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Edit"
                               @click="editTask(itemCard.array[indexSubcard])"
                               v-if="itemSubCard.statusRecord == 1"
                             >
@@ -138,6 +145,9 @@
                             <button
                               type="button"
                               class="btn btn-sm"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Delete"
                               v-if="itemSubCard.statusRecord == 1"
                               @click="deleteTask(itemCard.array[indexSubcard])"
                             >

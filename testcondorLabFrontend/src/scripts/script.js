@@ -1,7 +1,10 @@
+// We import axios for requests
 import axios from "axios";
 
 export default {
+ 
   name: "app",
+//we declare in the data function the variables to use
   data() {
     return {
       statusPending: 0,
@@ -14,6 +17,7 @@ export default {
       arrayListUsers: []
     };
   },
+  //in the function methods we declare the methods or functions that we will use in the project
   methods: {
     listUsers() {
       let me = this;
@@ -86,20 +90,23 @@ export default {
             console.error(err);
           })
       } else {
-        alert('¡Falta asignar el usuario!')
+        alert('¡ assign a user to the task !')
       }
     },
     deleteTask(arrayDelete) {
+      let option = confirm('¿ do you want to delete the task ?')
       let me = this;
-      axios.delete('http://localhost:3000/deleteTask', {
-        params: { id: arrayDelete.idTask }
-      })
-        .then(res => {
-          me.list();
+      if (option == true) {
+        axios.delete('http://localhost:3000/deleteTask', {
+          params: { id: arrayDelete.idTask }
         })
-        .catch(err => {
-          console.error(err);
-        })
+          .then(res => {
+            me.list();
+          })
+          .catch(err => {
+            console.error(err);
+          })
+      }
     },
     addTask(array, indexStatus) {
       array.push({
@@ -147,6 +154,7 @@ export default {
       }
     }
   },
+  //function that runs which file finishes loading
   mounted() {
     this.listUsers();
     this.list()
