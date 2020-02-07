@@ -38,10 +38,20 @@ module.exports = function (app) {
     });
     // change status of a task
     app.put('/changeStatusTask', (req, res) => {
-        const taskData = {
-            id: req.body.id,
-            statusTask: req.body.statusTask
-        };
+        let taskData;
+        if (req.body.statusTask != 3) {
+            taskData = {
+                id: req.body.id,
+                statusArchived: false,
+                statusTask: req.body.statusTask
+            };
+        } else {
+            taskData = {
+                id: req.body.id,
+                statusArchived: true
+            };
+        }
+        console.log(taskData)
         taskController.changeStatusTask(taskData, (err, data) => {
             res.json(data);
         });

@@ -17,9 +17,9 @@ taskController.createTask = (taskData, callBack) => {
 }
 // function to list our tasks
 taskController.listTasks = (taskData, callBack) => {
-    dataBase.query("select idTask, title, task, statusTask," +
-                   " idUser, 1 As statusRecord FROM tasks" + 
-                   " WHERE (statusTask = ? OR statusTask = 3)  AND title LIKE CONCAT('%', ? ,'%');",
+    dataBase.query("SELECT idTask, title, task, statusTask," +
+                   " idUser, 1 As statusRecord, statusArchived FROM tasks" + 
+                   " WHERE statusTask = ?  AND title LIKE CONCAT('%', ? ,'%');",
         { replacements: [taskData.statusTask, taskData.search], type: sequelize.QueryTypes.SELECT })
         .then(tasks => {
             callBack(null, tasks);
@@ -37,8 +37,7 @@ taskController.updateTask = (taskData, callBack) => {
 }
 //function to change the status of our tasks
 taskController.changeStatusTask = (taskData, callBack) => {
-    Task.update(
-        { statusTask: taskData.statusTask },
+    Task.update(taskData,
         { where: { idTask: taskData.id } }
     ).then(tasks => {
         callBack(null, tasks);
@@ -47,7 +46,6 @@ taskController.changeStatusTask = (taskData, callBack) => {
 }
 //function to delete a task our tasks
 taskController.deleteTask = (dataTask, callBack) => {
-    console.log(dataTask)
     Task.destroy({ where: { idTask: dataTask.id } }).then(tasks => {
         callBack(null, tasks);
     })

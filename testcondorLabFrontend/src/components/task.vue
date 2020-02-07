@@ -116,10 +116,10 @@
                   <!-- we validate that the status is different from archiving -->
                   <div
                     class="card"
-                    v-if="statusArchived != itemSubCard.statusTask || itemCard.viewArchived == 1"
+                    v-if="itemSubCard.statusArchived == false || itemCard.viewArchived == 1"
                   >
                     <div
-                      :class="statusArchived != itemSubCard.statusTask ? 'card-header header':'card-header header-archived'"
+                      :class="itemSubCard.statusArchived == false ? 'card-header header':'card-header header-archived'"
                     >
                       <div class="row">
                         <!-- title -->
@@ -158,7 +158,7 @@
                     ></textarea>
                     <!-- start the footer of the subcard -->
                     <div
-                      :class="showArchived != itemSubCard.statusTask ? 'card-foot foot':'card-foot foot-archived'"
+                      :class="itemSubCard.statusArchived == false ? 'card-foot foot':'card-foot foot-archived'"
                     >
                       <div class="row mt-1 mb-1">
                         <!-- select the users -->
@@ -183,6 +183,7 @@
                           <select
                             class="form-control selectpicker form-control-sm"
                             v-model="itemSubCard.statusTask"
+                            v-bind="itemSubCard.statusArchived == true ? itemSubCard.statusTask = 3: itemSubCard.statusTask "
                             :disabled="itemSubCard.statusRecord == 0"
                             @change="changeStatus(itemCard.array[indexSubcard])"
                           >

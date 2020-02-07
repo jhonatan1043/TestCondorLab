@@ -27,5 +27,10 @@ module.exports = dataBase.define("tasks", {
     statusTask: {
         type: Sequelize.INTEGER(11),
         allowNull: false
+    },
+    statusArchived: {
+        type: Sequelize.TINYINT(4),
+        defaultValue : 0,
+        allowNull: false
     }
 }) // end

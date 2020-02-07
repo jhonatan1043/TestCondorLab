@@ -11,6 +11,7 @@ CREATE TABLE tasks (
    task varchar(45) COLLATE utf8_spanish_ci NOT NULL,
    idUser int(11) NOT NULL,
    statusTask int(11) NOT NULL,
+   statusArchived tinyint(4) NOT NULL DEFAULT '0',
    createdAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updatedAt datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -21,10 +22,6 @@ CREATE TABLE users (
   email varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   createdAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updatedAt datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
-
-INSERT INTO testbd.users
-(userName,email) VALUES ('jhonatan','jhonat.rodri@yahoo.com'),('fulano','fulanodetal@yahoo.com');*/
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci; */
 
 

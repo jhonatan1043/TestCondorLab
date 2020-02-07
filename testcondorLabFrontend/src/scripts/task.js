@@ -47,7 +47,7 @@ export default {
             console.error(err);
           })
       } else {
-        alert('¡Falta asignar el usuario!')
+        alert('¡Missing user assignment!')
       }
     },
     listTasks(status) {
@@ -116,7 +116,8 @@ export default {
         task: '',
         statusTask: indexStatus,
         idUser: 0,
-        statusRecord: 0
+        statusRecord: 0,
+        statusArchived: false
       });
     },
     removeTask(index, array) {
@@ -134,8 +135,8 @@ export default {
 
     },
     closedModal() {
-      this.modal = 
-      0;
+      this.modal =
+        0;
     },
     showArchived(arrayArchived) {
       this.$set(arrayArchived, 'viewArchived', 1)
