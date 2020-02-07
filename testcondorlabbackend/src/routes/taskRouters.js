@@ -48,7 +48,6 @@ module.exports = function (app) {
     });
     // delete a task of the list
     app.delete('/deleteTask', (req, res) => {
-        console.log(req.query)
         taskController.deleteTask(req.query, (err, data) => {
             res.json(data);
         })

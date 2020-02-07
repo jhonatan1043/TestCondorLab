@@ -57,6 +57,7 @@
                     type="button"
                     class="btn btn-secondary"
                     data-dismiss="modal" 
+                    @click="listUsers()"
                   >Close</button>
                 </div>
               </div>
