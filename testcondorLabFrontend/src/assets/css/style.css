@@ -1,10 +1,7 @@
-.header {
-    background-color: #abebc6;
-  }
   .header-body {
     background-color: #8be3b0;
   }
-  .foot {
+  .header, .foot {
     background-color: #abebc6;
   }
   .title {
@@ -13,3 +10,7 @@
     font-size: 20px;
     font-style: normal;
   }
+  .header-archived, .foot-archived {
+    background-color: darkgray;
+  }
+  

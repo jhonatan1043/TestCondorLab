@@ -16,6 +16,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faBan} from '@fortawesome/free-solid-svg-icons'
+import {faEye} from '@fortawesome/free-solid-svg-icons'
+import {faEyeSlash} from '@fortawesome/free-solid-svg-icons'
+
 // declare library FontAwesomeIcon
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -28,6 +31,8 @@ library.add(faTimes);
 library.add(faUserPlus);
 library.add(faEdit);
 library.add(faBan);
+library.add(faEye);
+library.add(faEyeSlash)
 //declare components
 vue.component('font-awesome-icon', FontAwesomeIcon)
 vue.component('taskComponent', task)

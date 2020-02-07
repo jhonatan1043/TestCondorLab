@@ -19,7 +19,7 @@ taskController.createTask = (taskData, callBack) => {
 taskController.listTasks = (taskData, callBack) => {
     dataBase.query("select idTask, title, task, statusTask," +
                    " idUser, 1 As statusRecord FROM tasks" + 
-                   " WHERE statusTask = ? AND title LIKE CONCAT('%', ? ,'%');",
+                   " WHERE (statusTask = ? OR statusTask = 3)  AND title LIKE CONCAT('%', ? ,'%');",
         { replacements: [taskData.statusTask, taskData.search], type: sequelize.QueryTypes.SELECT })
         .then(tasks => {
             callBack(null, tasks);

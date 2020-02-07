@@ -2,7 +2,6 @@
 import axios from "axios";
 
 export default {
-
   name: "task",
   //we declare in the data function the variables to use
   data() {
@@ -10,11 +9,12 @@ export default {
       statusPending: 0,
       statusProgress: 1,
       statusCompleteds: 2,
+      statusArchived: 3,
       modal: 0,
       search: '',
-      arrayCards: [{ title: 'pending', array: [] },
-      { title: 'Progress', array: [] },
-      { title: 'Completeds', array: [] }],
+      arrayCards: [{ title: 'pending', array: [], viewArchived: 0 },
+      { title: 'Progress', array: [], viewArchived: 0 },
+      { title: 'Completeds', array: [], viewArchived: 0 }],
       arrayListUsers: []
     };
   },
@@ -131,9 +131,17 @@ export default {
     },
     openModal() {
       this.modal = 1;
+
     },
     closedModal() {
-      this.modal = 0;
+      this.modal = 
+      0;
+    },
+    showArchived(arrayArchived) {
+      this.$set(arrayArchived, 'viewArchived', 1)
+    },
+    hideArchived(arrayArchived) {
+      this.$set(arrayArchived, 'viewArchived', 0)
     },
     changeStatus(array) {
       let me = this;
