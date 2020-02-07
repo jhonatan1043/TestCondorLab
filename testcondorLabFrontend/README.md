@@ -6,7 +6,7 @@
 
 ``` bash
 #enters
-cd..testcondorlabfrontend
+cd testcondorlabfrontend
 
 # install dependencies
 npm install
