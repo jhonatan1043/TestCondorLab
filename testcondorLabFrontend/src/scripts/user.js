@@ -1,7 +1,10 @@
+// import module of axios for the request
 import axios from "axios";
 
 export default {
+
   name: "user",
+// function for declare the variables a use
   data() {
     return {
       show: 0,
@@ -12,6 +15,7 @@ export default {
       arrayUsers: []
     };
   },
+  // function for declare methods a use
   methods: {
     showForm() {
       this.show = 1;
@@ -109,15 +113,16 @@ export default {
     },
     validateControls() {
       if (this.userName == '') {
-        alert('digite el usuario')
+        alert('! white a user !')
       } else if (this.email == '') {
-        alert('digite el email')
+        alert('! white a email ¡')
       } else {
         return true;
       }
       return false;
     }
   },
+  //function that runs which file finishes loading
   mounted() {
     this.listUsers();
   }

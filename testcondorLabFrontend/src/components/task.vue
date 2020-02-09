@@ -14,7 +14,7 @@
             <input
               type="search"
               class="form-control form-control-sm"
-              placeholder="Search Task"
+              placeholder="Enter for search Task"
               v-model="search"
               @keyup.enter="list()"
             />
@@ -197,7 +197,7 @@
                             >Archived</option>
                           </select>
                         </div>
-                        <!-- button of fuction -->
+                        <!-- buttons of fuctions -->
 
                         <!-- register --->
                         <div class="col-4 text-right">

@@ -1,24 +1,28 @@
 <template>
   <div>
     <div class="card">
+      <!--we validate the form and show a list of users  -->
       <template v-if="show == 0">
         <button type="button" class="btn btn-sm btn-secondary" @click="showForm()">
           <font-awesome-icon icon="plus" />
         </button>
         <hr />
+        <!-- create a table where list the users, with a options -->
         <div class="table-responsive">
           <table class="table table-sm table-bordered table-hover">
             <thead>
-              <th class="text-center">Opciones</th>
+              <th class="text-center">Options</th>
               <th class="text-center">UserName</th>
               <th class="text-center">Email</th>
             </thead>
             <tbody>
               <tr v-for="(item, index) in arrayUsers" :key="index">
                 <td>
+                  <!-- edit -->
                   <button type="button" class="btn btn-sm btn-warning">
                     <font-awesome-icon icon="edit" @click="editUser(arrayUsers[index])" />
                   </button>&nbsp;
+                  <!-- delete -->
                   <button
                     type="button"
                     class="btn btn-sm btn-danger"
@@ -34,6 +38,7 @@
           </table>
         </div>
       </template>
+      <!-- hide the list and show the form for registry the info of the users -->
       <template v-else>
         <div class="card-body">
           <div class="row">
@@ -59,9 +64,11 @@
             </div>
           </div>
         </div>
+        <!-- buttons of functions -->
         <div class="card-foot">
           <div class="form-row">
             <div class="col-12 m-2">
+              <!-- create-->
               <button
                 type="button"
                 class="btn btn-sm btn-success"
@@ -70,6 +77,7 @@
               >
                 <font-awesome-icon icon="save" />&nbsp; Save
               </button>
+              <!-- update -->
               <button type="button" class="btn btn-sm btn-success" v-else @click="updateUser()">
                 <font-awesome-icon icon="save" />&nbsp; Update
               </button> &nbsp;
